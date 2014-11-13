@@ -1,8 +1,8 @@
-function [optimal_NN,confusion_matrix, f1, recall, precision, CR] = final_function(x,y)
+function [NeuNet,confusion_matrix, f1, recall, precision, CR] = final_function(x,y)
 %To find the best topology with average initial weigths, and opti param 
 %=================================================
 %Find the optimal topology
-	[topology, bestF1] = cross_fold_topo('traingd(0.1)', 10000, x, y);
+	[topology, init_weights, bestF1] = cross_fold_topo('traingd(0.1)', 10000, x, y);
 %=================================================
 %Optimize the traingd parameter on the best topology
 
