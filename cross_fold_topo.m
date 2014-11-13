@@ -8,7 +8,7 @@ function [ topology, MeanWeights, bestF1 ] = cross_fold_topo(trainingfc,epoch,x,
     for i=1:10
         %Optimize the parameters
 		[Fone(i,:), Nets(i,:)]    =      topologyFinder( trainingfc, epoch, matrices{2}{i}, matrices{4}{i}, matrices{2}{i}(1:100, :), matrices{4}{i}(1:100) );
-        localF1         =      localF1 + Fones(i,:);   
+        localF1                   =      localF1 + Fone(i,:);   
         %Sum the weights - array_weights
     end
 	
@@ -16,6 +16,6 @@ function [ topology, MeanWeights, bestF1 ] = cross_fold_topo(trainingfc,epoch,x,
     [bestF1, index]     =      max(localF1);
     topology            =      [index+5, index+5, index+5]; 
 	for i = 1:10
-		wb(:,i) = formwb(Nets{i,index}, Nets{i,index}.b, Nets{i,index}.iw, Nets{i,index}.lw);
+		wb(:,i)         =      formwb(Nets{i,index}, Nets{i,index}.b, Nets{i,index}.iw, Nets{i,index}.lw);
 	end
-	MeanWeights = mean(wb,2);
+	MeanWeights         =      mean(wb,2);

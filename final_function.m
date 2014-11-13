@@ -4,7 +4,7 @@ function [NeuNet,confusion_matrix, f1, recall, precision, CR] = final_function(x
 %Find the optimal topology
 	[topology, init_weights, bestF1]    =     cross_fold_topo('traingd(0.1)', 10000, x, y);
 %=================================================
-%Optimize the traingd parameter on the best topology
+
 
 	
     %Create the local variable storing the optimal traingd learning rate
