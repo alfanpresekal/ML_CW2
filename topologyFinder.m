@@ -1,5 +1,5 @@
 function [output] = topologyFinder(FNname,epochs,x,y,x2,y2)
-
+%Train a NN for each 
 layersNNeurons = LayersNNeurons();
 numberOfIterations=size(layersNNeurons,1);
 netCell = cell(40,1);
