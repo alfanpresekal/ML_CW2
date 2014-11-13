@@ -3,21 +3,19 @@ function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y,x2,y2
 %======================================================
 %Train a NN for each learning rate.
     %Get the struct containing the different function tested
-    input_functions   =    load('input_functions');
+    input_functions       =    load('input_functions');
     %-----------------------------
     %Initialisation
     numberOfIterations    =    size(input_functions,2);
     netCell               =    cell(40,1);
-    predictionsCell = cell(40,1); 
-    confusionCell = cell(40,1);
-    output = [];
+    predictionsCell       =    cell(40,1); 
+    confusionCell         =    cell(40,1);
+    output                =    [];
     %-----------------------------
     %Creates the NN for all the topologies
     for i=1:numberOfIterations
-        netCell(i) = {Create_NN(topology,input_functions{i},epochs,x,y)};
-    end   
+        netCell(i)        =    {Create_NN(topology,input_functions{i},epochs,x,y)}; 
     %Get the predictions of all the NN on the validation set
-    for j=1:numberOfIterations
         predictionsCell(j) = {testANN(netCell{j},x2)};
     end
     %Get the confusion matrix for each NN
