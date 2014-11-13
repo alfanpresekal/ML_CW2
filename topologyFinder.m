@@ -1,4 +1,4 @@
-function [output] = topologyFinder(FNname,epochs,x,y,x2,y2)
+function [output,netCell] = topologyFinder(FNname,epochs,x,y,x2,y2)
 %Test different learning rates and return the f1 value.
 %======================================================
 %Train a NN for each topology
@@ -7,12 +7,13 @@ function [output] = topologyFinder(FNname,epochs,x,y,x2,y2)
     %-----------------------------
     %Initialisation
     numberOfIterations=size(layersNNeurons,1);
-    netCell = cell(40,1);
+	netCell = cell(40,i);
     predictionsCell = cell(40,1); 
     confusionCell = cell(40,1);
     output = [];
     %-----------------------------
     %Creates the NN for all the topologies
+	
     for i=1:numberOfIterations
         netCell(i) = {Create_NN(layersNNeurons(i,1:end),FNname,epochs,x,y)};
     end   
@@ -26,7 +27,7 @@ function [output] = topologyFinder(FNname,epochs,x,y,x2,y2)
     end
     %Get the confusion measures for each NN
     for l=1:numberOfIterations
-        [recall, precision, Fone,CR] = ClassMeasure(build_confusion_matrix(confusionCell{l}));
-         output = [output,Fone];
+        [recall, precision, Fone, CR] = ClassMeasure(build_confusion_matrix(confusionCell{l}));
+        output = [output,Fone];
     end
 end 
