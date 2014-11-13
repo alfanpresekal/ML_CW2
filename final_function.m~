@@ -1,0 +1,31 @@
+function [optimal_NN,confusion_matrix, f1, recall, precision, CR] = final_function(trainingfc,epochs,x,y)
+%To find the best topology with average initial weigths, and opti param 
+%=================================================
+%Find the optimal topology
+	[topology, bestF1] = cross_fold_topo('traingd(0.1)', 10000, x, y);
+%=================================================
+%Optimize the traingd parameter on the best topology
+	
+%=================================================
+%Return the optimized Neural Network
+    %Configure a NN with the optimals parameters 
+    [examples, binary_targets] = ANNdata(x,y);
+    temp = strfind(TFuncNParam,'(');
+    trainFunc = TFuncNParam(1:temp-1);
+    NeuNet = feedforwardnet(HiddLay, trainFunc);
+    NeuNet = configure(NeuNet, examples, binary_targets);
+    %----------------------------------
+    %Input the average initial weights
+    net = setwb(net,average_Iweights);
+    NeuNet.trainParam.epochs = epochs;
+    NeuNet.divideFcn = 'divideind';
+    NeuNet.divideParam.valInd   = 1:100;
+    NeuNet.divideParam.trainInd = 101:size(examples,2);
+    lr = TFuncNParam(temp+1:end-1);
+    lr = str2double(lr);
+	NeuNet.trainParam.lr = lr;	
+    optimal_NN = neunet;
+    NeuNet = train(NeuNet, examples, binary_targets);
+%=========================================
+%Get the confusion_matrix and the measures
+	[confusion_matrix, f1, recall, precision, CR] = cross_fold_fc(topology, trainingfc,epoch,x,y);
