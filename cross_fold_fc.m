@@ -15,7 +15,7 @@ function [confusion_matrix, f1, recall, precision, CR ] = cross_fold_fc(NeuNet, 
         %Add the result to the final confusion matrix
         matrixForBuilding   =      matrixForBuilding + compare_result;
     end
-%============================================================    
+%============================================================   
 %Get the ouput
     %Return the average confusion matrix
     temp                         =      matrixForBuilding;    
