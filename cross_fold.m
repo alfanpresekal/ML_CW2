@@ -1,4 +1,4 @@
-function [confusion_matrix, f1, recall, precision, CR ] = cross_fold_fc(NeuNet, x, y)
+function [confusion_matrix, f1, recall, precision, CR ] = cross_fold(NeuNet, x, y)
 %Run the 10 cross validation and ouputs the f1 value of the average confusion matrix
 %============================================================
     %Initialize local variables
