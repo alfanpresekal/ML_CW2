@@ -7,7 +7,7 @@ function [output,netCell] = topologyFinder(FNname,epochs,x,y,x2,y2)
     %-----------------------------
     %Initialisation
     numberOfIterations=size(layersNNeurons,1);
-	netCell = cell(40,i);
+	netCell = cell(40,1);
     predictionsCell = cell(40,1); 
     confusionCell = cell(40,1);
     output = [];
