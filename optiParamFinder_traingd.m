@@ -1,20 +1,20 @@
-function [ output_args ] = optiParamFinder_traingd( epochs,x,y,x2,y2 )
+function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y,x2,y2 )
 %Test different learning rates and return the f1 value.
 %======================================================
 %Train a NN for each learning rate.
     %Get the struct containing the different function tested
-    load('input_functions');
+    input_functions   =    load('input_functions');
     %-----------------------------
     %Initialisation
-    numberOfIterations=size(input_functions,2);
-    netCell = cell(40,1);
+    numberOfIterations    =    size(input_functions,2);
+    netCell               =    cell(40,1);
     predictionsCell = cell(40,1); 
     confusionCell = cell(40,1);
     output = [];
     %-----------------------------
     %Creates the NN for all the topologies
     for i=1:numberOfIterations
-        netCell(i) = {Create_NN(layersNNeurons(i,1:end),FNname,epochs,x,y)};
+        netCell(i) = {Create_NN(topology,input_functions{i},epochs,x,y)};
     end   
     %Get the predictions of all the NN on the validation set
     for j=1:numberOfIterations
