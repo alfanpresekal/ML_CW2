@@ -11,7 +11,8 @@ function [ topology, init_weights, bestF1 ] = cross_fold_topo(trainingfc,epoch,x
         %Sum the weights - array_weights
     end
     %Get the best parameters
-    [bestF1, topology]  =      max(localF1);
+    [bestF1, index]     =      max(localF1);
+    topology            =      [index, index, index]; 
     init_weights        =      array_weights(1, topology);
 end
 
