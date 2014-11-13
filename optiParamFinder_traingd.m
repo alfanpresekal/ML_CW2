@@ -6,7 +6,7 @@ function [ output_args ] = optiParamFinder_traingd( epochs,x,y,x2,y2 )
     load('input_functions');
     %-----------------------------
     %Initialisation
-    numberOfIterations=size(input_functions,1);
+    numberOfIterations=size(input_functions,2);
     netCell = cell(40,1);
     predictionsCell = cell(40,1); 
     confusionCell = cell(40,1);
