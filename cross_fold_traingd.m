@@ -1,4 +1,4 @@
-function [ optimal_param, init_weights, bestF1 ] = cross_fold_fc(topology, trainingfc,epoch,x,y)
+function [ optimal_param, init_weights, bestF1 ] = cross_fold_traingd(topology, trainingfc,epoch,x,y)
 %Run the 10 cross validation and ouputs the f1 value of the average confusion matrix
     %Initialize local variables
     localF1             =      zeros(1,40);

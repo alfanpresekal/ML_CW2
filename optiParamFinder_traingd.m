@@ -1,4 +1,4 @@
-function [ output_args ] = optiParamFinder( input_args )
+function [ output_args ] = optiParamFinder_traingd( epochs,x,y,x2,y2 )
 %Test different learning rates and return the f1 value.
 %======================================================
 %Train a NN for each learning rate.
