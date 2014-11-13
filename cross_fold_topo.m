@@ -8,9 +8,10 @@ function [ topology, init_weights, bestF1 ] = cross_fold_topo(trainingfc,epoch,x
     for i=1:10
         %Optimize the parameters
         localF1         =      localF1 + topologyFinder( trainingfc, epoch, matrices{2}{i}, matrices{4}{i}, matrices{2}{i}(1:100, :), matrices{4}{i}(1:100) );   
-        array_weights
+        %Sum the weights - array_weights
     end
     %Get the best parameters
     [bestF1, topology]  =      max(localF1);
+    init_weights        =      array_weights(1, topology);
 end
 
