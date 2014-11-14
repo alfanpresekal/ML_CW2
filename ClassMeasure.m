@@ -1,4 +1,5 @@
 function [recall, precision, Fone,CR] = ClassMeasure(confusionMatrix)
+%To calculate the performance on cross validation    
     confusionMatrix = cellfun(@str2num,confusionMatrix(2:end,2:end));
     emotions = size(confusionMatrix,1);
     for i = 1:emotions

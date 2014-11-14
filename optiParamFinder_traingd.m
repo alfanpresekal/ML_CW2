@@ -1,5 +1,5 @@
 function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y,x2,y2)
-%Test different learning rates and return the f1 value.
+%Test different learning rates and return the optimal one with the threshold fixed.
 %======================================================
 %Train a NN for each learning rate.
     %Get the struct containing the different function tested
