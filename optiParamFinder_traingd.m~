@@ -1,9 +1,9 @@
-function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y,x2,y2 )
+function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y)
 %Test different learning rates and return the f1 value.
 %======================================================
 %Train a NN for each learning rate.
     %Get the struct containing the different function tested
-    input_functions       =    load('input_functions');
+    load('input_functions');
     %-----------------------------
     %Initialisation
     numberOfIterations    =    size(input_functions,2);
@@ -11,20 +11,21 @@ function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y,x2,y2
     predictionsCell       =    cell(40,1); 
     confusionCell         =    cell(40,1);
     output                =    [];
+    matrices              =    cross_fold_gathering(x,y);
+    Fone                  =    1;
+    i                     =    1;
     %-----------------------------
-    %Creates the NN for all the topologies
-    for i=1:numberOfIterations
-        netCell(i)        =    {Create_NN(topology,input_functions{i},epochs,x,y)}; 
-    %Get the predictions of all the NN on the validation set
-        predictionsCell(j) = {testANN(netCell{j},x2)};
+    while (CR > 0.7)
+        %Creates the NN 
+        netCell(i)          =    {Create_NN(topology,input_functions{i},epochs,matrices{2}{1}, matrices{4}{1})}; 
+        %Get the predictions on the validation set
+        predictionsCell(i)  =    {testANN(netCell{i}, matrices{2}{1}(1:100, :))};
+        %Get the confusion matrix 
+        confusionCell(i)    =    {compare(predictionsCell{i}, matrices{4}{1}(1:100))};
+        %Get the confusion measures 
+        [recall, precision, Fone,CR] = ClassMeasure(build_confusion_matrix(confusionCell{i}));
+        output = [output,CR];
+        i                  =    i + 1;
     end
-    %Get the confusion matrix for each NN
-    for k=1:numberOfIterations
-       confusionCell(k) = {compare(predictionsCell{k},y2)};
-    end
-    %Get the confusion measures for each NN
-    for l=1:numberOfIterations
-        [recall, precision, Fone,CR] = ClassMeasure(build_confusion_matrix(confusionCell{l}));
-         output = [output,Fone];
-    end
+    opti_function = input_functions{i-1};
 end 

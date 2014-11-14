@@ -12,10 +12,10 @@ function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y)
     confusionCell         =    cell(40,1);
     output                =    [];
     matrices              =    cross_fold_gathering(x,y);
-    Fone                  =    1;
+    CR                  =    1;
     i                     =    1;
     %-----------------------------
-    while (Fone > 0.75)
+    while (CR > 0.6)
         %Creates the NN 
         netCell(i)          =    {Create_NN(topology,input_functions{i},epochs,matrices{2}{1}, matrices{4}{1})}; 
         %Get the predictions on the validation set
@@ -24,8 +24,8 @@ function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y)
         confusionCell(i)    =    {compare(predictionsCell{i}, matrices{4}{1}(1:100))};
         %Get the confusion measures 
         [recall, precision, Fone,CR] = ClassMeasure(build_confusion_matrix(confusionCell{i}));
-         output = [output,Fone];
-         i                  =    i +1;
+        output = [output,CR];
+        i                  =    i + 1;
     end
     opti_function = input_functions{i-1};
 end 
