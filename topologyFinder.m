@@ -6,11 +6,13 @@ function [output,netCell] = topologyFinder(opti_function,epochs,x,y,x2,y2)
     layersNNeurons         =      LayersNNeurons();
     %-----------------------------
     %Initialisation
+
     numberOfIterations     =      size(layersNNeurons,1);
-	netCell                =      cell(40,1);
+	netCell                =      cell(1,40);
     predictionsCell        =      cell(40,1); 
     confusionCell          =      cell(40,1);
     output                 =      [];
+
     %-----------------------------
     %Creates the NN for all the topologies    
     for i=1:numberOfIterations
