@@ -1,4 +1,4 @@
-function [output,netCell] = topologyFinder(FNname,epochs,x,y,x2,y2)
+function [output,netCell] = topologyFinder(opti_function,epochs,x,y,x2,y2)
 %Test different learning rates and return the f1 value.
 %======================================================
 %Train a NN for each topology
@@ -11,14 +11,8 @@ function [output,netCell] = topologyFinder(FNname,epochs,x,y,x2,y2)
     predictionsCell        =      cell(40,1); 
     confusionCell          =      cell(40,1);
     output                 =      [];
-    opti_function          =      cell(40,1);
     %-----------------------------
-    %Creates the NN for all the topologies
-	
-    for m=1:numberOfIterations
-        opti_function(m)  = {optiParamFinder_traingd(layersNNeurons(m,1:end), epochs,x,y, x2, y2)};
-    end 
-    
+    %Creates the NN for all the topologies    
     for i=1:numberOfIterations
         netCell(i) = {Create_NN(layersNNeurons(i,1:end),opti_function{i},epochs,x,y)};
     end   
