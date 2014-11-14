@@ -1,4 +1,4 @@
-function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y)
+function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y,x2,y2)
 %Test different learning rates and return the f1 value.
 %======================================================
 %Train a NN for each learning rate.
@@ -10,21 +10,19 @@ function [ opti_function ] = optiParamFinder_traingd( topology, epochs,x,y)
     netCell               =    cell(40,1);
     predictionsCell       =    cell(40,1); 
     confusionCell         =    cell(40,1);
-    output                =    [];
     matrices              =    cross_fold_gathering(x,y);
-    CR                  =    1;
+    CR                    =    1;
     i                     =    1;
     %-----------------------------
-    while (CR > 0.6)
+    while (CR > 0.7)
         %Creates the NN 
-        netCell(i)          =    {Create_NN(topology,input_functions{i},epochs,matrices{2}{1}, matrices{4}{1})}; 
+        netCell(i)          =    {Create_NN(topology,input_functions{i},epochs,x, y)}; 
         %Get the predictions on the validation set
-        predictionsCell(i)  =    {testANN(netCell{i}, matrices{2}{1}(1:100, :))};
+        predictionsCell(i)  =    {testANN(netCell{i},x2)};
         %Get the confusion matrix 
-        confusionCell(i)    =    {compare(predictionsCell{i}, matrices{4}{1}(1:100))};
+        confusionCell(i)    =    {compare(predictionsCell{i}, y2)};
         %Get the confusion measures 
         [recall, precision, Fone,CR] = ClassMeasure(build_confusion_matrix(confusionCell{i}));
-        output = [output,CR];
         i                  =    i + 1;
     end
     opti_function = input_functions{i-1};

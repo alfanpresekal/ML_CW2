@@ -16,7 +16,7 @@ function [output,netCell] = topologyFinder(FNname,epochs,x,y,x2,y2)
     %Creates the NN for all the topologies
 	
     for m=1:numberOfIterations
-        opti_function(m)  = {optiParamFinder_traingd(layersNNeurons(m,1:end), epochs,x,y)};
+        opti_function(m)  = {optiParamFinder_traingd(layersNNeurons(m,1:end), epochs,x,y, x2, y2)};
     end 
     
     for i=1:numberOfIterations
