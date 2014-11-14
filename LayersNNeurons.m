@@ -1,8 +1,8 @@
-function [layerNeuronSet] = LayersNNeurons()
+function [layerNeuronSet] = LayersNNeurons(layers)
 %To generate the different topologies tested
 %================================================
 %Initialisation/parameters
-    maxLayer = 3;
+    maxLayer = layers;
     minNeurons = 6;
     maxNeurons  = 45;
     counter = minNeurons;
