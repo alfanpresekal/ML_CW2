@@ -3,7 +3,7 @@ function [output,netCell] = topologyFinder(opti_function,epochs,x,y,x2,y2)
 %======================================================
 %Train a NN for each topology
     %Get the struct containing the different topologies tested
-    layersNNeurons         =      LayersNNeurons();
+    layersNNeurons         =      LayersNNeurons(2);
     %-----------------------------
     %Initialisation
 

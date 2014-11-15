@@ -3,7 +3,7 @@ function [ topology, MeanWeights, bestF1 ] = cross_fold_topo(trainingfc,epoch,x,
     %Initialize local variables
     localF1             =      zeros(1,40);
     opti_function       =      cell(40,1);
-    layersNNeurons      =      LayersNNeurons();
+    layersNNeurons      =      LayersNNeurons(2);
     %Creates the validationSet & dataSet for each fold
     matrices            =      cross_fold_gathering(x,y);
     %Optimize the training function
